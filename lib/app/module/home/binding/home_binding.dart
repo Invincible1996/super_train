@@ -5,8 +5,11 @@
 */
 
 import 'package:get/get.dart';
+import 'package:super_train/app/module/home/controller/home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override
-  void dependencies() {}
+  void dependencies() {
+    Get.lazyPut(() => HomeController());
+  }
 }

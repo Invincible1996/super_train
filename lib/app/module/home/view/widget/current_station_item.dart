@@ -9,8 +9,10 @@ class CurrentStationItem extends StatelessWidget {
   final String title;
   final String station;
   final VoidCallback onTapItem;
+  final IconData iconData;
 
-  const CurrentStationItem({Key key, this.title, this.station, this.onTapItem})
+  const CurrentStationItem(
+      {Key key, this.title, this.station, this.onTapItem, this.iconData})
       : super(key: key);
 
   @override
@@ -20,28 +22,39 @@ class CurrentStationItem extends StatelessWidget {
         onTapItem?.call();
       },
       child: Container(
-        width: 100,
-        height: 60,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(6),
-        ),
+            // color: Colors.white,
+            // borderRadius: BorderRadius.circular(6),
+            ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '$title',
-              style: TextStyle(fontSize: 12),
+            Icon(
+              iconData,
+              size: 20,
+              color: Colors.white,
             ),
+            // Text(
+            //   '$title',
+            //   style: TextStyle(fontSize: 12),
+            // ),
             SizedBox(
-              height: 2,
+              height: 5,
             ),
             Text(
               '$station',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '$title',
+              style: TextStyle(fontSize: 12,color: Colors.white),
             ),
           ],
         ),

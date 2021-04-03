@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:super_train/app/route/app_routes.dart';
+import 'package:super_train/style/custom_color.dart';
 
 import 'model/dog.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: CustomColor.primaryColor,
       ),
       getPages: AppPages.getPages(),
       initialRoute: AppRoutes.HOME,
