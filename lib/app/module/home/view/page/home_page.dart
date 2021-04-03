@@ -42,7 +42,9 @@ class HomePage extends GetView<HomeController> {
                           height: 10,
                         ),
                         Text(
-                          '${DateUtil.formatDate(DateTime.now(), format: 'yyyy年MM月dd日')}',
+                          '${DateUtil.formatDate(DateTime.now(), format: 'yyyy年MM月dd日')}${DateUtil.getWeekday(
+                            DateTime.now(),
+                          )}',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
