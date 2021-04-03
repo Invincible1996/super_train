@@ -23,6 +23,7 @@ class CurrentStationItem extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.center,
+        width: 80,
         decoration: BoxDecoration(
             // color: Colors.white,
             // borderRadius: BorderRadius.circular(6),

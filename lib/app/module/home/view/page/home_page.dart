@@ -92,7 +92,14 @@ class HomePage extends GetView<HomeController> {
                               color: Colors.white,
                               size: 26,
                             ),
-                            onPressed: () {})),
+                            onPressed: () {
+                              final temp1 = controller.fromStation.value;
+                              final temp2 = controller.toStation.value;
+                              controller
+                                  .setFromStation(temp2);
+                              controller
+                                  .setToStation(temp1);
+                            })),
                     Obx(
                       () => CurrentStationItem(
                         iconData: Icons.location_on,
