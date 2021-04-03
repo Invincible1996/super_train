@@ -4,8 +4,10 @@
  * @Description: flutter
 */
 
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/view/widget/current_station_item.dart';
@@ -31,12 +33,20 @@ class HomePage extends GetView<HomeController> {
                       children: [
                         Text(
                           '站站查询',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22),
+                          style: GoogleFonts.maShanZheng(
+                            textStyle:
+                                TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Text(
-                          '今日：${DateTime.now()}',
-                          style: TextStyle(fontSize: 12),
+                          '${DateUtil.formatDate(DateTime.now(), format: 'yyyy年MM月dd日')}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
@@ -95,10 +105,8 @@ class HomePage extends GetView<HomeController> {
                             onPressed: () {
                               final temp1 = controller.fromStation.value;
                               final temp2 = controller.toStation.value;
-                              controller
-                                  .setFromStation(temp2);
-                              controller
-                                  .setToStation(temp1);
+                              controller.setFromStation(temp2);
+                              controller.setToStation(temp1);
                             })),
                     Obx(
                       () => CurrentStationItem(
