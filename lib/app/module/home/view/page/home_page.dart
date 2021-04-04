@@ -34,8 +34,7 @@ class HomePage extends GetView<HomeController> {
                         Text(
                           '站站查询',
                           style: GoogleFonts.maShanZheng(
-                            textStyle:
-                                TextStyle(color: Colors.black, fontSize: 22),
+                            textStyle: TextStyle(color: Colors.black, fontSize: 22),
                           ),
                         ),
                         SizedBox(
@@ -56,8 +55,7 @@ class HomePage extends GetView<HomeController> {
                         width: 35,
                         height: 35,
                         decoration: BoxDecoration(
-                            color: HexColor('#eae7fe'),
-                            borderRadius: BorderRadius.circular(8)),
+                            color: HexColor('#eae7fe'), borderRadius: BorderRadius.circular(8)),
                         child: Icon(
                           Icons.wb_sunny,
                           color: CustomColor.primaryColor,
@@ -71,8 +69,7 @@ class HomePage extends GetView<HomeController> {
               Container(
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                    color: CustomColor.primaryColor,
-                    borderRadius: BorderRadius.circular(6)),
+                    color: CustomColor.primaryColor, borderRadius: BorderRadius.circular(6)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -157,6 +154,8 @@ class HomePage extends GetView<HomeController> {
                 ),
                 onPressed: () {
                   print('${controller.fromStation}---${controller.toStation}');
+                  Get.toNamed(AppRoutes.TRAIN_SELECT,
+                      arguments: '${controller.fromStation}<>${controller.toStation}');
                 },
                 child: Container(
                   alignment: Alignment.center,

@@ -37,7 +37,7 @@ class StationSelectController extends GetxController {
   /// 根据名称查询
   queryStationByValue(String condition) async {
     List<StationModel> stationList =
-        await DbUtil.copyDbFileToCacheDocument(condition);
+        await DbUtil.copyDbFileToCacheDocument(condition,1);
     print(stationList);
     selectList.assignAll(stationList);
   }

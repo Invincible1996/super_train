@@ -42,6 +42,11 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
+
+        lintOptions {
+            disable 'InvalidPackage'
+            checkReleaseBuilds false //Insert this line
+        }
     }
 
     signingConfigs {
@@ -58,6 +63,7 @@ android {
             keyPassword "wade..900813"
         }
     }
+
 
     buildTypes {
         release {

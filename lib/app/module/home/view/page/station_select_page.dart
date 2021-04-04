@@ -100,8 +100,8 @@ class StationSelectPage extends GetView<StationSelectController> {
                               children: List.generate(
                                   5,
                                   (index) => Container(
-                                        width: 50,
-                                        height: 20,
+                                    width: 65,
+                                    height: 25,
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           color: HexColor('#edeff1'),
@@ -111,7 +111,7 @@ class StationSelectPage extends GetView<StationSelectController> {
                                         child: Text(
                                           '苏州',
                                           style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             color: Colors.black,
                                           ),
                                         ),
@@ -144,7 +144,7 @@ class StationSelectPage extends GetView<StationSelectController> {
                                       },
                                       child: Container(
                                         width: 65,
-                                        height: 20,
+                                        height: 25,
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           color: HexColor('#edeff1'),
@@ -154,7 +154,7 @@ class StationSelectPage extends GetView<StationSelectController> {
                                         child: Text(
                                           '${e.stationName}',
                                           style: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             color: Colors.black,
                                           ),
                                         ),
