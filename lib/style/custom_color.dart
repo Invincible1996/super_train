@@ -5,6 +5,7 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CustomColor {
   static const MaterialColor primaryColor = const MaterialColor(
@@ -22,4 +23,6 @@ class CustomColor {
       900: const Color(0xFF0E7AC7),
     },
   );
+
+  static final Color colorDivide = HexColor('#e6e6e6');
 }
