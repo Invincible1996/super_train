@@ -154,8 +154,13 @@ class HomePage extends GetView<HomeController> {
                 ),
                 onPressed: () {
                   print('${controller.fromStation}---${controller.toStation}');
-                  Get.toNamed(AppRoutes.TRAIN_SELECT,
-                      arguments: '${controller.fromStation}<>${controller.toStation}');
+                  Get.toNamed(
+                    AppRoutes.TRAIN_SELECT,
+                    arguments: {
+                      'fromStation': controller.fromStation.value,
+                      'toStation': controller.toStation.value,
+                    },
+                  );
                 },
                 child: Container(
                   alignment: Alignment.center,

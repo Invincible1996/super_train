@@ -13,11 +13,13 @@ class TrainSelectController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    queryTrainList();
+    String fromStation = Get.arguments['fromStation'];
+    String toStation = Get.arguments['toStation'];
+    queryTrainList(fromStation, toStation);
   }
 
-  queryTrainList() async {
-    final list = await DbUtil.copyDbFileToCacheDocument('', 2);
+  queryTrainList(String fromStation, String toStation) async {
+    final list = await DbUtil.queryTrainDetailList(fromStation, toStation);
     trainList.assignAll(list);
   }
 }

@@ -13,11 +13,12 @@ import 'package:super_train/style/custom_color.dart';
 class TrainSelectPage extends GetView<TrainSelectController> {
   @override
   Widget build(BuildContext context) {
-    final title = Get.arguments;
+    final fromStation = Get.arguments['fromStation'];
+    final toStation = Get.arguments['toStation'];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('$title'),
+        title: Text('$fromStation<>$toStation'),
       ),
       body: Container(
         child: Obx(() {
@@ -267,7 +268,9 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                               )),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -277,12 +280,10 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                           borderRadius: new BorderRadius.circular(6.0),
                         ),
                       ),
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                       child: Container(
                         alignment: Alignment.center,
-                        width: Get.width*.85,
+                        width: Get.width * .85,
                         // color: HexColor('#eae7fe'),
                         child: Text(
                           '确 认',
