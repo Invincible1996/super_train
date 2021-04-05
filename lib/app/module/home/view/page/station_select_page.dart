@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/controller/station_select_controller.dart';
+import 'package:super_train/app/widget/common_app_bar.dart';
 import 'package:super_train/style/custom_color.dart';
 
 class StationSelectPage extends GetView<StationSelectController> {
@@ -16,9 +17,7 @@ class StationSelectPage extends GetView<StationSelectController> {
   Widget build(BuildContext context) {
     final appBarTitle = Get.arguments;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('$appBarTitle'),
-      ),
+      appBar: CommonAppBar(title: '$appBarTitle',),
       body: Container(
         child: Column(
           children: [

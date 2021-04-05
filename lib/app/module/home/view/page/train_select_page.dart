@@ -3,10 +3,13 @@
  * @date 2021/4/4 09:55
  * @Description: flutter
 */
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/controller/train_select_controller.dart';
+import 'package:super_train/app/widget/common_app_bar.dart';
 import 'package:super_train/model/train_detail_model.dart';
 import 'package:super_train/style/custom_color.dart';
 
@@ -15,11 +18,12 @@ class TrainSelectPage extends GetView<TrainSelectController> {
   Widget build(BuildContext context) {
     final fromStation = Get.arguments['fromStation'];
     final toStation = Get.arguments['toStation'];
+    HomeController homeController = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: CommonAppBar(
+        title: '$fromStation<>$toStation',
         elevation: 0,
-        title: Text('$fromStation<>$toStation'),
       ),
       body: Container(
         child: Obx(() {
@@ -37,20 +41,48 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                           color: Colors.white,
                         ),
                         onPressed: () {}),
-                    Container(
-                      width: 70,
-                      height: 30,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(6)),
-                      child: Text('4月4日'),
+                    GestureDetector(
+                      onTap: () async {
+                        DateTime selectDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(
+                            2021,
+                            5,
+                            30,
+                          ),
+                        );
+
+                        print(selectDate);
+                        homeController.setDate(selectDate);
+                      },
+                      child: Container(
+                        width: 70,
+                        height: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white, borderRadius: BorderRadius.circular(6)),
+                        child: Text(
+                          '${DateUtil.formatDate(homeController.selectDate.value, format: 'MM月dd日')}',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
                     ),
                     IconButton(
                       icon: Icon(
                         Icons.arrow_right,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        final nowDate = DateTime.now();
+                        int year = nowDate.year;
+                        int month = nowDate.month;
+                        int day = nowDate.day;
+                        print('$year$month$day');
+                      },
                     ),
                   ],
                 ),

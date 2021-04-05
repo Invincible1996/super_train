@@ -24,7 +24,10 @@ platform :android do
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")
-    pgyer(api_key: "11cad500a370a52876b9be4df16de982", user_key: "8eb23e2b81d76dbeebe3a73c53bfdc3d",apk:"/Users/kevin/Documents/flutter-project/super_train/build/app/outputs/apk/release/app-release.apk")
+    pgyer(api_key: "11cad500a370a52876b9be4df16de982", user_key: "8eb23e2b81d76dbeebe3a73c53bfdc3d",
+    # apk:"/Users/kevin/Documents/flutter-project/super_train/build/app/outputs/apk/release/app-release.apk",
+    apk:"../build/app/outputs/apk/release/app-release.apk"
+    )
   end
 
   desc "Deploy a new version to the Google Play"
