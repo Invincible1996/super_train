@@ -50,14 +50,15 @@ class HomePage extends GetView<HomeController> {
                       ],
                     ),
                     Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                            color: HexColor('#eae7fe'), borderRadius: BorderRadius.circular(8)),
-                        child: Icon(
-                          Icons.wb_sunny,
-                          color: CustomColor.primaryColor,
-                        )),
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          color: HexColor('#eae7fe'), borderRadius: BorderRadius.circular(8)),
+                      child: Icon(
+                        Icons.wb_sunny,
+                        color: CustomColor.primaryColor,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -66,8 +67,14 @@ class HomePage extends GetView<HomeController> {
               ),
               Container(
                 padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    color: CustomColor.primaryColor, borderRadius: BorderRadius.circular(6)),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 3,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ], color: CustomColor.primaryColor, borderRadius: BorderRadius.circular(6)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -139,6 +146,14 @@ class HomePage extends GetView<HomeController> {
                     child: Container(
                       margin: EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 3,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
                       ),

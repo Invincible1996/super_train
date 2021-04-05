@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/controller/train_select_controller.dart';
+import 'package:super_train/app/module/home/view/widget/train_filter_modal.dart';
 import 'package:super_train/app/widget/common_app_bar.dart';
 import 'package:super_train/model/train_detail_model.dart';
 import 'package:super_train/style/custom_color.dart';
@@ -20,7 +21,7 @@ class TrainSelectPage extends GetView<TrainSelectController> {
     final toStation = Get.arguments['toStation'];
     HomeController homeController = Get.find<HomeController>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: HexColor('#f5f5f5'),
       appBar: CommonAppBar(
         title: '$fromStation<>$toStation',
         elevation: 0,
@@ -98,7 +99,15 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                           margin: EdgeInsets.only(top: 15, left: 15, right: 15),
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: HexColor('#f6f7f8'),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 2,
+                                blurRadius: 3,
+                                offset: Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
@@ -181,15 +190,15 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Row(
-                                children: [
-                                  Text('一等座：100'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text('二等座：200'),
-                                ],
-                              )
+                              // Row(
+                              //   children: [
+                              //     Text('一等座：100'),
+                              //     SizedBox(
+                              //       width: 10,
+                              //     ),
+                              //     Text('二等座：200'),
+                              //   ],
+                              // )
                             ],
                           ),
                         );
@@ -200,174 +209,9 @@ class TrainSelectPage extends GetView<TrainSelectController> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
-          Get.bottomSheet(
-            Container(
-              height: 500,
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 1,
-                          color: CustomColor.colorDivide,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text('重置'),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => Get.back(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text('关闭'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Text(
-                      '车次类型',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Wrap(
-                      runSpacing: 10,
-                      spacing: 10,
-                      children: List.generate(
-                          2,
-                          (index) => Container(
-                                width: 65,
-                                height: 25,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: HexColor('#edeff1'),
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: Text(
-                                  '高铁/动车',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Text(
-                      '出发站',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Wrap(
-                      runSpacing: 10,
-                      spacing: 10,
-                      children: List.generate(
-                          3,
-                          (index) => Container(
-                                width: 65,
-                                height: 25,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: HexColor('#edeff1'),
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: Text(
-                                  '苏州',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Text(
-                      '到达站',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10),
-                    child: Wrap(
-                      runSpacing: 10,
-                      spacing: 10,
-                      children: List.generate(
-                          2,
-                          (index) => Container(
-                                width: 65,
-                                height: 25,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: HexColor('#edeff1'),
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: Text(
-                                  '苏州',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: HexColor('#eae7fe'), // background
-                        // onPrimary: HexColor('#eae7fe'),
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(6.0),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: Get.width * .85,
-                        // color: HexColor('#eae7fe'),
-                        child: Text(
-                          '确 认',
-                          style: TextStyle(
-                            color: CustomColor.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+          if (index == 0) {
+            Get.bottomSheet(TrainFilterModal());
+          }
         },
         type: BottomNavigationBarType.fixed,
         items: [

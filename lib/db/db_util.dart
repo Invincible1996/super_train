@@ -62,11 +62,50 @@ class DbUtil {
 
   /// 根据车站查询车次详情
   static Future<List<TrainDetailModel>> queryTrainDetailList(
-      String fromStation, String toStation) async {
+    String fromStation,
+    String toStation, {
+    trainType,
+    List<String> fromStationList,
+    List<String> toStationList,
+  }) async {
     final db = await openLocalDatabase();
     List<TrainDetailModel> trainDetailList = [];
-    var dbList = await db.rawQuery(
-        "select * from  train_detail where from_station_name like '%$fromStation%' and to_station_name like '%$toStation%';");
+    String fromStationFilterString = "from_station_name = '' ";
+    String toStationFilterString = "to_station_name=";
+    // for (var item in fromStationList) {
+    //   fromStationFilterString += "'$item'or from_station_name=";
+    // }
+
+    // if(fromStationList.isNotEmpty) fromStationFilterString = '';
+    // if(toStationList.isNotEmpty) toStationFilterString = '';
+
+    for (int i = 0; i < fromStationList.length; i++) {
+      if (i == fromStationList.length - 1) {
+        fromStationFilterString += "'${fromStationList[i]}'";
+      } else {
+        fromStationFilterString += "'${fromStationList[i]}'or from_station_name=";
+      }
+    }
+
+    for (int i = 0; i < toStationList.length; i++) {
+      if (i == toStationList.length - 1) {
+        toStationFilterString += "'${toStationList[i]}'";
+      } else {
+        toStationFilterString += "'${toStationList[i]}'or to_station_name=";
+      }
+    }
+
+    print(fromStationFilterString);
+    print(toStationFilterString);
+
+    var querySql = "select * from  train_detail where from_station_name like '%$fromStation%'"
+        "and to_station_name like '%$toStation%' "
+        "and $fromStationFilterString "
+        "and $toStationFilterString;";
+    print(querySql);
+    var dbList = await db
+        .rawQuery("select * from  train_detail where from_station_name like '%$fromStation%'"
+            "and to_station_name like '%$toStation%';");
     for (var item in dbList) {
       trainDetailList.add(
         TrainDetailModel(
@@ -84,4 +123,7 @@ class DbUtil {
     }
     return trainDetailList;
   }
+
+  /// 根据条件筛选
+
 }

@@ -7,6 +7,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final title;
@@ -46,7 +47,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             leading: isShowLeftIcon ?? true
                 ? IconButton(
                     icon: Icon(
-                      Icons.arrow_back_ios_outlined,
+                      Icons.arrow_back_ios_rounded,
                       color: Colors.white,
                       size: 26,
                     ),
@@ -54,7 +55,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       if (onPressBack != null) {
                         onPressBack();
                       } else {
-                        Navigator.pop(context);
+                       Get.back();
                       }
                     })
                 : SizedBox.shrink(),
