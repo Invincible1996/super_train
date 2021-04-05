@@ -41,9 +41,7 @@ class HomePage extends GetView<HomeController> {
                           height: 10,
                         ),
                         Text(
-                          '${DateUtil.formatDate(DateTime.now(), format: 'yyyy年MM月dd日')}${DateUtil.getWeekday(
-                            DateTime.now(),
-                          )}',
+                          '${DateUtil.formatDate(DateTime.now(), format: 'yyyy年MM月dd日')}  ${DateUtil.getWeekday(DateTime.now(), languageCode: 'zh')}',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -121,46 +119,47 @@ class HomePage extends GetView<HomeController> {
                   ],
                 ),
               ),
-              Obx(()=>GestureDetector(
-                onTap: () async {
-                  DateTime selectDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(
-                      2021,
-                      5,
-                      30,
-                    ),
-                  );
-                  print(selectDate);
-                  controller.setDate(selectDate);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: Colors.white,
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
+              Obx(() => GestureDetector(
+                    onTap: () async {
+                      DateTime selectDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(
+                          2021,
+                          5,
+                          30,
+                        ),
+                      );
+                      print(selectDate);
+                      controller.setDate(selectDate);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                              '${DateUtil.formatDate(controller.selectDate.value, format: 'MM月dd日')}'),
-                          SizedBox(
-                            width: 10,
+                          Row(
+                            children: [
+                              Text(
+                                  '${DateUtil.formatDate(controller.selectDate.value, format: 'MM月dd日')}'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                  '${DateUtil.getWeekday(controller.selectDate.value, languageCode: 'zh')}'),
+                            ],
                           ),
-                          Text('${DateUtil.getWeekday(controller.selectDate.value)}'),
+                          Icon(Icons.arrow_right_outlined),
                         ],
                       ),
-                      Icon(Icons.arrow_right_outlined),
-                    ],
-                  ),
-                ),
-              )),
+                    ),
+                  )),
               SizedBox(
                 height: 10,
               ),
