@@ -132,7 +132,9 @@ class HomePage extends GetView<HomeController> {
                         ),
                       );
                       print(selectDate);
-                      controller.setDate(selectDate);
+                      if (selectDate != null) {
+                        controller.setDate(selectDate);
+                      }
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 10),

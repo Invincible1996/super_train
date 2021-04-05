@@ -55,7 +55,9 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                         );
 
                         print(selectDate);
-                        homeController.setDate(selectDate);
+                        if (selectDate != null) {
+                          homeController.setDate(selectDate);
+                        }
                       },
                       child: Container(
                         width: 70,
