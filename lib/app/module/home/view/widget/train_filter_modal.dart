@@ -16,7 +16,7 @@ class TrainFilterModal extends GetView<TrainSelectController> {
     print(controller.toStationList);
     print(controller.trainTypeList);
     return Container(
-      height: 330,
+      height: 350,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,6 +177,7 @@ class TrainFilterModal extends GetView<TrainSelectController> {
               ),
             ),
           ),
+          SizedBox(height: 20,),
         ],
       ),
     );
@@ -206,7 +207,7 @@ class StationCheckedItem extends GetView<TrainSelectController> {
       },
       child: Container(
         width: 65,
-        height: 25,
+        height: 30,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: isChecked ? Colors.white : HexColor('#edeff1'),

@@ -96,7 +96,12 @@ class TrainSelectPage extends GetView<TrainSelectController> {
                       itemBuilder: (context, index) {
                         TrainDetailModel model = controller.trainList[index];
                         return Container(
-                          margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+                          margin: EdgeInsets.only(
+                            top: 15,
+                            left: 15,
+                            right: 15,
+                            bottom: index == controller.trainList.length - 1 ? 15 : 0,
+                          ),
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.white,
