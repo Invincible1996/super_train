@@ -18,114 +18,150 @@ class TrainSelectPage extends GetView<TrainSelectController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         title: Text('$fromStation<>$toStation'),
       ),
       body: Container(
         child: Obx(() {
-          return ListView.builder(
-              itemCount: controller.trainList.length,
-              itemBuilder: (context, index) {
-                TrainDetailModel model = controller.trainList[index];
-                return Container(
-                  margin: EdgeInsets.only(top: 15, left: 15, right: 15),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: HexColor('#f6f7f8'),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.near_me,
-                              size: 20,
-                            ),
+          return Column(
+            children: [
+              Container(
+                height: 45,
+                color: CustomColor.primaryColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        icon: Icon(
+                          Icons.arrow_left,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {}),
+                    Container(
+                      width: 70,
+                      height: 30,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(6)),
+                      child: Text('4月4日'),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_right,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: controller.trainList.length,
+                      itemBuilder: (context, index) {
+                        TrainDetailModel model = controller.trainList[index];
+                        return Container(
+                          margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: HexColor('#f6f7f8'),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${model.fromStationName}',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '${model.goTime}',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: CustomColor.primaryColor,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Icon(
+                                      Icons.near_me,
+                                      size: 20,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${model.trainNumber}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                  Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '${model.fromStationName}',
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '${model.goTime}',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: CustomColor.primaryColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Icon(Icons.arrow_right_alt),
-                                Text('${model.costTime}'),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.location_on,
-                              size: 20,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${model.toStationName}',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '${model.arriveTime}',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: CustomColor.primaryColor,
+                                  Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '${model.trainNumber}',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(Icons.arrow_right_alt),
+                                        Text('${model.costTime}'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(
-                        height: 1,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Text('一等座：100'),
-                          SizedBox(
-                            width: 10,
+                                  Expanded(
+                                    flex: 1,
+                                    child: Icon(
+                                      Icons.location_on,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '${model.toStationName}',
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '${model.arriveTime}',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: CustomColor.primaryColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Divider(
+                                height: 1,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text('一等座：100'),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('二等座：200'),
+                                ],
+                              )
+                            ],
                           ),
-                          Text('二等座：200'),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              });
+                        );
+                      }))
+            ],
+          );
         }),
       ),
       bottomNavigationBar: BottomNavigationBar(

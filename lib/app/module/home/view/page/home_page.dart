@@ -121,32 +121,52 @@ class HomePage extends GetView<HomeController> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.white,
-                ),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text('4月3日'),
-                        Text('周六'),
-                      ],
+              Obx(()=>GestureDetector(
+                onTap: () async {
+                  DateTime selectDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(
+                      2021,
+                      5,
+                      30,
                     ),
-                    Icon(Icons.arrow_right_outlined),
-                  ],
+                  );
+                  print(selectDate);
+                  controller.setDate(selectDate);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                              '${DateUtil.formatDate(controller.selectDate.value, format: 'MM月dd日')}'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('${DateUtil.getWeekday(controller.selectDate.value)}'),
+                        ],
+                      ),
+                      Icon(Icons.arrow_right_outlined),
+                    ],
+                  ),
                 ),
-              ),
+              )),
               SizedBox(
                 height: 10,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: HexColor('#eae7fe'), // background
+                  // primary: HexColor('#eae7fe'), // background
                   // onPrimary: HexColor('#eae7fe'),
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(6.0),
@@ -163,13 +183,14 @@ class HomePage extends GetView<HomeController> {
                   );
                 },
                 child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   alignment: Alignment.center,
                   width: Get.width,
                   // color: HexColor('#eae7fe'),
                   child: Text(
                     '查询',
                     style: TextStyle(
-                      color: CustomColor.primaryColor,
+                      color: Colors.white,
                     ),
                   ),
                 ),

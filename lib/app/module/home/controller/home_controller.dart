@@ -11,6 +11,8 @@ class HomeController extends GetxController {
   RxString fromStation = '上海虹桥'.obs;
   RxString toStation = '苏州'.obs;
 
+  Rx<DateTime> selectDate = DateTime.now().obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -25,5 +27,9 @@ class HomeController extends GetxController {
 
   setToStation(String value) {
     toStation.value = value;
+  }
+
+  void setDate(DateTime dateTime) {
+    selectDate.value = dateTime;
   }
 }
