@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:super_train/app/module/home/view/widget/train_filter_modal.dart';
 import 'package:super_train/model/station_model.dart';
 import 'package:super_train/model/train_detail_model.dart';
 
@@ -64,48 +65,58 @@ class DbUtil {
   static Future<List<TrainDetailModel>> queryTrainDetailList(
     String fromStation,
     String toStation, {
-    trainType,
-    List<String> fromStationList,
-    List<String> toStationList,
+    List traintypeList,
+    List fromStationList,
+    List toStationList,
   }) async {
+
+    traintypeList ??=[];
+    fromStationList ??=[];
+    toStationList ??=[];
+
     final db = await openLocalDatabase();
     List<TrainDetailModel> trainDetailList = [];
-    String fromStationFilterString = "from_station_name = '' ";
-    String toStationFilterString = "to_station_name=";
-    // for (var item in fromStationList) {
-    //   fromStationFilterString += "'$item'or from_station_name=";
-    // }
+    String fromStationFilterString = "";
+    String toStationFilterString = "";
 
-    // if(fromStationList.isNotEmpty) fromStationFilterString = '';
-    // if(toStationList.isNotEmpty) toStationFilterString = '';
-
-    for (int i = 0; i < fromStationList.length; i++) {
-      if (i == fromStationList.length - 1) {
-        fromStationFilterString += "'${fromStationList[i]}'";
-      } else {
-        fromStationFilterString += "'${fromStationList[i]}'or from_station_name=";
+    if (fromStationList.length == 1) {
+      fromStationFilterString = '${fromStationList[0].stationName}';
+    } else {
+      for (int i = 0; i < fromStationList.length; i++) {
+        if (i == fromStationList.length - 1) {
+          fromStationFilterString += "'${fromStationList[i].stationName}'";
+        } else {
+          fromStationFilterString += "'${fromStationList[i].stationName},";
+        }
       }
     }
 
-    for (int i = 0; i < toStationList.length; i++) {
-      if (i == toStationList.length - 1) {
-        toStationFilterString += "'${toStationList[i]}'";
-      } else {
-        toStationFilterString += "'${toStationList[i]}'or to_station_name=";
+    if (toStationList.length == 1) {
+      toStationFilterString = '${toStationList[0].stationName}';
+    } else {
+      for (int i = 0; i < toStationList.length; i++) {
+        if (i == toStationList.length - 1) {
+          toStationFilterString += "'${toStationList[i].stationName}";
+        } else {
+          toStationFilterString += "${toStationList[i].stationName}',";
+        }
       }
     }
 
     print(fromStationFilterString);
     print(toStationFilterString);
 
-    var querySql = "select * from  train_detail where from_station_name like '%$fromStation%'"
-        "and to_station_name like '%$toStation%' "
-        "and $fromStationFilterString "
-        "and $toStationFilterString;";
+    var fromStationFilterSql =
+        fromStationList.isNotEmpty ? "and from_station_name in ('$fromStationFilterString')" : '';
+    var toStationFilterSql =
+        toStationList.isNotEmpty ? "and to_station_name in ('$toStationFilterString')" : '';
+
+    var querySql =
+        "select *from train_detail where from_station_name like '%$fromStation%'and to_station_name like '%$toStation%'"
+        "$fromStationFilterSql"
+        "$toStationFilterSql;";
     print(querySql);
-    var dbList = await db
-        .rawQuery("select * from  train_detail where from_station_name like '%$fromStation%'"
-            "and to_station_name like '%$toStation%';");
+    var dbList = await db.rawQuery(querySql);
     for (var item in dbList) {
       trainDetailList.add(
         TrainDetailModel(

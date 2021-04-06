@@ -5,8 +5,10 @@
 */
 
 import 'package:get/get.dart';
+import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/view/widget/train_filter_modal.dart';
 import 'package:super_train/db/db_util.dart';
+import 'package:super_train/model/train_detail_model.dart';
 
 class TrainSelectController extends GetxController {
   /// 车次集合
@@ -37,8 +39,6 @@ class TrainSelectController extends GetxController {
     final list = await DbUtil.queryTrainDetailList(
       fromStation,
       toStation,
-      toStationList: ['苏州', '苏州北'],
-      fromStationList: [],
     );
     for (var item in list) {
       if (!fromStationList.contains(item.fromStationName)) {
@@ -131,5 +131,27 @@ class TrainSelectController extends GetxController {
         trainTypeList.assignAll(newList);
         break;
     }
+  }
+
+  /// @desc 根据筛选条件查询
+  queryTainListByFilterCondition() async {
+    ///
+    final selectTypeList = trainTypeList.where((item) => item.isChecked).toList();
+    print(selectTypeList);
+
+    final selectToStationList = toStationList.where((item) => item.isChecked).toList();
+
+    final selectFromStationList = fromStationList.where((item) => item.isChecked).toList();
+
+    HomeController homeController = Get.find<HomeController>();
+
+    List<TrainDetailModel> selectTrainList = await DbUtil.queryTrainDetailList(
+      homeController.fromStation.value,
+      homeController.toStation.value,
+      traintypeList: selectTypeList,
+      toStationList: selectToStationList,
+      fromStationList: selectFromStationList,
+    );
+    trainList.assignAll(selectTrainList);
   }
 }

@@ -161,6 +161,7 @@ class TrainFilterModal extends GetView<TrainSelectController> {
                 ),
               ),
               onPressed: () {
+                controller.queryTainListByFilterCondition();
                 Get.back();
               },
               child: Container(
@@ -177,7 +178,9 @@ class TrainFilterModal extends GetView<TrainSelectController> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
