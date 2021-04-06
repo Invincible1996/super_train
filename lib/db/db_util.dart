@@ -74,20 +74,9 @@ class DbUtil {
 
     final db = await openLocalDatabase();
     List<TrainDetailModel> trainDetailList = [];
+
     String fromStationFilterString = "'";
     String toStationFilterString = "'";
-
-    // if (fromStationList.length == 1) {
-    //   fromStationFilterString = '${fromStationList[0].stationName}';
-    // } else {
-    //   for (int i = 0; i < fromStationList.length; i++) {
-    //     if (i == fromStationList.length - 1) {
-    //       fromStationFilterString += "'${fromStationList[i].stationName}'";
-    //     } else {
-    //       fromStationFilterString += "'${fromStationList[i].stationName},";
-    //     }
-    //   }
-    // }
 
     for (var i = 0; i < fromStationList.length; i++) {
       fromStationFilterString +=
@@ -108,9 +97,10 @@ class DbUtil {
         toStationList.isNotEmpty ? "and to_station_name in ($toStationFilterString)" : '';
 
     var querySql =
-        "select *from train_detail where from_station_name like '%$fromStation%'and to_station_name like '%$toStation%'"
+        "select * from train_detail where from_station_name like '%$fromStation%' and to_station_name like '%$toStation%'"
         "$fromStationFilterSql"
         "$toStationFilterSql;";
+
     print(querySql);
     var dbList = await db.rawQuery(querySql);
     for (var item in dbList) {
