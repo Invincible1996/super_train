@@ -17,6 +17,9 @@ class StationSelectController extends GetxController {
     StationModel(stationName: '上海虹桥', stationCode: 'AOH', id: 1),
     StationModel(stationName: '北京南', stationCode: 'VNP', id: 289),
     StationModel(stationName: '上海', stationCode: 'VNP', id: 289),
+    StationModel(stationName: '昆山南', stationCode: 'VNP', id: 289),
+    StationModel(stationName: '芜湖', stationCode: 'VNP', id: 289),
+    StationModel(stationName: '无锡', stationCode: 'VNP', id: 289),
   ];
 
   /// 查询的车站

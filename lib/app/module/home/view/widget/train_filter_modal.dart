@@ -12,11 +12,8 @@ import 'package:super_train/style/custom_color.dart';
 class TrainFilterModal extends GetView<TrainSelectController> {
   @override
   Widget build(BuildContext context) {
-    print(controller.fromStationList);
-    print(controller.toStationList);
-    print(controller.trainTypeList);
     return Container(
-      height: 350,
+      height: 360,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
