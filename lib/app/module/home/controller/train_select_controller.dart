@@ -5,10 +5,11 @@
 */
 
 import 'package:get/get.dart';
-import 'package:super_train/app/module/home/controller/home_controller.dart';
 import 'package:super_train/app/module/home/view/widget/train_filter_modal.dart';
 import 'package:super_train/db/db_util.dart';
 import 'package:super_train/model/train_detail_model.dart';
+
+import 'home_controller.dart';
 
 class TrainSelectController extends GetxController {
   /// 车次集合

@@ -9,7 +9,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:super_train/app/module/home/view/widget/train_filter_modal.dart';
 import 'package:super_train/model/station_model.dart';
 import 'package:super_train/model/train_detail_model.dart';
 
@@ -69,47 +68,44 @@ class DbUtil {
     List fromStationList,
     List toStationList,
   }) async {
-
-    traintypeList ??=[];
-    fromStationList ??=[];
-    toStationList ??=[];
+    traintypeList ??= [];
+    fromStationList ??= [];
+    toStationList ??= [];
 
     final db = await openLocalDatabase();
     List<TrainDetailModel> trainDetailList = [];
-    String fromStationFilterString = "";
-    String toStationFilterString = "";
+    String fromStationFilterString = "'";
+    String toStationFilterString = "'";
 
-    if (fromStationList.length == 1) {
-      fromStationFilterString = '${fromStationList[0].stationName}';
-    } else {
-      for (int i = 0; i < fromStationList.length; i++) {
-        if (i == fromStationList.length - 1) {
-          fromStationFilterString += "'${fromStationList[i].stationName}'";
-        } else {
-          fromStationFilterString += "'${fromStationList[i].stationName},";
-        }
-      }
+    // if (fromStationList.length == 1) {
+    //   fromStationFilterString = '${fromStationList[0].stationName}';
+    // } else {
+    //   for (int i = 0; i < fromStationList.length; i++) {
+    //     if (i == fromStationList.length - 1) {
+    //       fromStationFilterString += "'${fromStationList[i].stationName}'";
+    //     } else {
+    //       fromStationFilterString += "'${fromStationList[i].stationName},";
+    //     }
+    //   }
+    // }
+
+    for (var i = 0; i < fromStationList.length; i++) {
+      fromStationFilterString +=
+          i != fromStationList.length - 1 ? "${fromStationList[i].stationName}','" : "${fromStationList[i].stationName}'";
     }
 
-    if (toStationList.length == 1) {
-      toStationFilterString = '${toStationList[0].stationName}';
-    } else {
-      for (int i = 0; i < toStationList.length; i++) {
-        if (i == toStationList.length - 1) {
-          toStationFilterString += "'${toStationList[i].stationName}";
-        } else {
-          toStationFilterString += "${toStationList[i].stationName}',";
-        }
-      }
+    for (var i = 0; i < toStationList.length; i++) {
+      toStationFilterString +=
+      i != toStationList.length - 1 ? "${toStationList[i].stationName}','" : "${toStationList[i].stationName}'";
     }
 
     print(fromStationFilterString);
     print(toStationFilterString);
 
     var fromStationFilterSql =
-        fromStationList.isNotEmpty ? "and from_station_name in ('$fromStationFilterString')" : '';
+        fromStationList.isNotEmpty ? "and from_station_name in ($fromStationFilterString)" : '';
     var toStationFilterSql =
-        toStationList.isNotEmpty ? "and to_station_name in ('$toStationFilterString')" : '';
+        toStationList.isNotEmpty ? "and to_station_name in ($toStationFilterString)" : '';
 
     var querySql =
         "select *from train_detail where from_station_name like '%$fromStation%'and to_station_name like '%$toStation%'"
