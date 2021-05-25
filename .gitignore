@@ -44,7 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/app/super_train.keystore
+#/android/app/super_train.keystore
 /android/Gemfile.lock
 pubspec.lock
 ios/Podfile.lock
