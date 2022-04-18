@@ -55,7 +55,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       if (onPressBack != null) {
                         onPressBack();
                       } else {
-                       Get.back();
+                        Get.back();
                       }
                     })
                 : SizedBox.shrink(),
